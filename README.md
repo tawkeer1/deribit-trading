@@ -1,6 +1,6 @@
 # Deribit API Trading System in C++
 
-This project is a trading system built in C++ for interacting with the Deribit Test API. It allows you to place, cancel, modify orders, view the order book, and retrieve current position details on the Deribit platform(https://test.deribit.com/). The project uses `cURL` for HTTP requests and `nlohmann/json` for JSON parsing.
+This project is a trading system built in C++ for interacting with the Deribit Test API. It allows you to place, cancel, modify orders, view the order book, Get realtime data from deribit using websocketpp and retrieve current position details on the Deribit platform(https://test.deribit.com/). The project uses `cURL` for HTTP requests and `nlohmann/json` for JSON parsing.
 
 ## Features
 
@@ -27,7 +27,9 @@ This project is a trading system built in C++ for interacting with the Deribit T
     ```bash
     sudo apt install nlohmann-json3-dev
     ```
-
+2. **Websocket**: Download the websocket from github:
+    ```bash
+    sudo apt install nlohmann-json3-dev
 ## Setup
 
 1. Clone the repository to your local machine:
@@ -46,7 +48,5 @@ This project is a trading system built in C++ for interacting with the Deribit T
 Use the following command to compile the project:
 
 ```bash
-g++ main.cpp -o trading_system -lcurl -I include
-# deribit-trading
-# deribit-trading
-# deribit-trading
+g++ main.cpp -o main -std=c++17 -I. -lpthread -lcurl -lssl -lcrypto
+
