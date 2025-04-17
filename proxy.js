@@ -11,44 +11,44 @@ proxyServer.on('connection', function connection(clientSocket) {
     const deribitSocket = new WebSocket(TARGET_WSS);
 
     deribitSocket.on('open', () => {
-        console.log('✅ Connected to Deribit');
+        console.log('Connected to Deribit');
 
         clientSocket.on('message', (msg) => {
             let msgStr = Buffer.isBuffer(msg) ? msg.toString('utf8') : msg;
-            console.log('📨 From client:', msgStr);
+            console.log('From client:', msgStr);
 
             try {
                 JSON.parse(msgStr);
             } catch (err) {
-                console.warn('❌ JSON parse failed:', err.message);
+                console.warn('JSON parse failed:', err.message);
             }
 
             if (deribitSocket.readyState === WebSocket.OPEN) {
                 deribitSocket.send(msgStr);
-                console.log('🔁 Sent to Deribit');
+                console.log('Sent to Deribit');
             }
         });
 
         deribitSocket.on('message', (data) => {
-            console.log('📬 From Deribit:', data);
+            console.log('From Deribit:', data);
 
             if (clientSocket.readyState === WebSocket.OPEN) {
                 try {
                     clientSocket.send(data);
-                    console.log('✅ Forwarded to client');
+                    console.log('Forwarded to client');
                 } catch (err) {
-                    console.error('❌ Error sending to client:', err.message);
+                    console.error('Error sending to client:', err.message);
                 }
             }
         });
     });
 
     deribitSocket.on('error', err => {
-        console.error('❌ Deribit error:', err.message);
+        console.error('Deribit error:', err.message);
     });
 
     clientSocket.on('error', err => {
-        console.error('❌ Client error:', err.message);
+        console.error('Client error:', err.message);
     });
 
     clientSocket.on('close', () => {
